@@ -59,8 +59,8 @@ function Form() {
             .catch((err) => {
                 console.log(err);
                 toast.error("Error de conexion");
-            });
-        setloading(false);
+            })
+            .finally(() => setloading(false));
     };
 
     return (

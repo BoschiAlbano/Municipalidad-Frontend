@@ -60,7 +60,6 @@ function Register() {
                     setTimeout(() => {
                         window.location.href = "/login";
                     }, 2000);
-                    setloading(false);
                 } else {
                     // si existe detalles mostrar mesanje de error.
                     if (!data?.detalles) {
@@ -69,12 +68,13 @@ function Register() {
                     data?.detalles?.map((error: any) => {
                         toast.error(`${error.campo}: ${error.mensaje}`);
                     });
-                    setloading(false);
                 }
             })
             .catch((err) => {
                 console.log(err);
                 toast.error("Error de conexion");
+            })
+            .finally(() => {
                 setloading(false);
             });
     };
