@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const RegisterComponent = () => {
     return (
@@ -23,7 +24,7 @@ function Register() {
     });
 
     const [loading, setloading] = useState<boolean>(false);
-
+    const navigate = useNavigate();
     const [passwordShow, setpasswordShow] = useState<boolean>(false);
     const [repetirpasswordShow, setRepetirpasswordShow] =
         useState<boolean>(false);
@@ -58,7 +59,7 @@ function Register() {
                     toast.success(data.mensaje);
                     // navegar a login.
                     setTimeout(() => {
-                        window.location.href = "/login";
+                        navigate("/login");
                     }, 2000);
                 } else {
                     // si existe detalles mostrar mesanje de error.

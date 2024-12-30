@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const LoginComponent = () => {
     return (
@@ -15,6 +16,7 @@ export default LoginComponent;
 function Form() {
     const [data, setData] = useState({ Email: "", Password: "" });
     const [passwordShow, setpasswordShow] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const [loading, setloading] = useState<boolean>(false);
 
@@ -44,7 +46,7 @@ function Form() {
                     toast.success(data.mensaje);
 
                     setTimeout(() => {
-                        window.location.href = "/";
+                        navigate("/");
                     }, 2000);
                 } else {
                     // si existe detalles mostrar mesanje de error.
