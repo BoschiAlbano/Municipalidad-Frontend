@@ -60,7 +60,7 @@ function Menu() {
     }
 
     async function salir() {
-        await fetch(`${import.meta.env.VITE_BACKEND_URL}/logout`, {
+        await fetch(`/api/logout`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

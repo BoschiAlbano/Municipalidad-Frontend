@@ -32,12 +32,14 @@ function Form() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
-            credentials: "include",
+            // credentials: "include",
         })
             .then(async (res) => {
                 const data = await res.json();
                 if (res.ok) {
+                    localStorage.setItem("acceso", data.datos.acceso);
                     toast.success(data.mensaje);
+
                     setTimeout(() => {
                         window.location.href = "/";
                     }, 2000);

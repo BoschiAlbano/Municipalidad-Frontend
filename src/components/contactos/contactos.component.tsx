@@ -17,7 +17,7 @@ const ContactosComponent = () => {
         async function GETAll() {
             setLoading(true);
             if (!store.length) {
-                await fetch(`${import.meta.env.VITE_BACKEND_URL}/agenda`, {
+                await fetch(`/api/agenda`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -79,7 +79,7 @@ function Tarjetas({ item }: { item: contacto }) {
     const { eliminar } = useAgendaActions();
 
     const btnDelete = async ({ id }: { id: number }) => {
-        await fetch(`${import.meta.env.VITE_BACKEND_URL}/agenda/${id}`, {
+        await fetch(`/api/agenda/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

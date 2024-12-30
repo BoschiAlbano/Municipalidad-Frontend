@@ -5,13 +5,19 @@ import { store } from "../redux/store/store";
 
 const ProtectedRoutes = () => {
     // Función para obtener el token de las cookies
+    // const getTokenFromCookies = () => {
+    //     const cookies = document.cookie.split("; ");
+    //     console.log(cookies);
+    //     const tokenCookie = cookies.find((cookie) =>
+    //         cookie.startsWith("session=")
+    //     );
+    //     return tokenCookie ? tokenCookie.split("=")[1] : null;
+    // };
+
+    // Función para obtener el token de las LocalStorage
     const getTokenFromCookies = () => {
-        const cookies = document.cookie.split("; ");
-        console.log(cookies);
-        const tokenCookie = cookies.find((cookie) =>
-            cookie.startsWith("session=")
-        );
-        return tokenCookie ? tokenCookie.split("=")[1] : null;
+        const token = localStorage.getItem("acceso");
+        return token ? true : false;
     };
 
     // Verificar si el token existe

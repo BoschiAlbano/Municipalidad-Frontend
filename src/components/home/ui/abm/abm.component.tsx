@@ -81,7 +81,7 @@ function Abm() {
 
     async function newContact() {
         // usar api.
-        await fetch(`${import.meta.env.VITE_BACKEND_URL}/agenda`, {
+        await fetch(`/api/agenda`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -121,7 +121,7 @@ function Abm() {
 
     async function UpdateContact() {
         // usar api.
-        await fetch(`${import.meta.env.VITE_BACKEND_URL}/agenda`, {
+        await fetch(`/api/agenda`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
