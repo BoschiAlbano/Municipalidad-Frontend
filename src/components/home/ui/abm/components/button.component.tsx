@@ -9,7 +9,7 @@ export default function ButtonAbm() {
             <button
                 className=" rounded-md color text-white p-2 Saltar  w-[36px] h-[36px]"
                 onClick={() => {
-                    contextAbm?.handleClose(!contextAbm.OpenClose);
+                    contextAbm?.handleClose(!contextAbm.openClose);
                 }}
             >
                 Boton

@@ -7,7 +7,7 @@ export const agendaSlice = createSlice({
     name: "agenda",
     initialState: INITIAL_STATE_DEFAULT,
     reducers: {
-        addAllItem: (state, action: PayloadAction<contacto[]>) => {
+        addAllItem: (_, action: PayloadAction<contacto[]>) => {
             return action.payload;
         },
         addItem: (state, action: PayloadAction<contacto>) => {

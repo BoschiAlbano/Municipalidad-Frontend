@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { validateObject } from "../../utilities/validarObjeto";
 import { toast } from "sonner";
 
 const RegisterComponent = () => {
@@ -39,16 +38,6 @@ function Register() {
 
         if (data.Password !== data.RepetirPassword) {
             return toast.error("Las contraseñas no coinciden");
-        }
-
-        // validar datos.
-        const validar = validateObject(data, {
-            allowZero: true,
-            allowFalse: true,
-        });
-
-        if (!validar.isValid) {
-            return toast.error("hay campos vacios");
         }
 
         // usar api.

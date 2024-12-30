@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
-import { validateObject } from "../../utilities/validarObjeto";
 
 const LoginComponent = () => {
     return (
@@ -26,16 +25,6 @@ function Form() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // validar datos.
-        const validar = validateObject(data, {
-            allowZero: true,
-            allowFalse: true,
-        });
-
-        if (!validar.isValid) {
-            return toast.error("hay campos vacios");
-        }
-
         // usar api.
         await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
             method: "POST",
