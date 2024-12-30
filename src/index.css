@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Modal Menu */
+.showCarrito {
+    right: 0%;
+    animation: showframeCarrito 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.showNotCarrito {
+    right: 0%;
+    animation: shownotframeCarrito 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+        both;
+}
+
+@keyframes showframeCarrito {
+    0% {
+        transform: translatex(-65px);
+        opacity: 0;
+    }
+    100% {
+        transform: translatex(0%);
+        opacity: 1;
+    }
+}
+@keyframes shownotframeCarrito {
+    0% {
+        transform: translatex(0%);
+        opacity: 1;
+    }
+    100% {
+        transform: translatex(-65px);
+        opacity: 0;
+    }
+}
+
+/* Modal Abm */
+.showAbm {
+    right: 0%;
+    animation: showframeAbm 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.showNotAbm {
+    right: 0%;
+    animation: shownotframeAbm 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes showframeAbm {
+    0% {
+        transform: translatex(500px);
+        opacity: 0;
+    }
+    100% {
+        transform: translatex(0%);
+        opacity: 1;
+    }
+}
+@keyframes shownotframeAbm {
+    0% {
+        transform: translatex(0%);
+        opacity: 1;
+    }
+    100% {
+        transform: translatex(500px);
+        opacity: 0;
+    }
+}
+
+/* Boton menu */
+/* From Uiverse.io by Ali-Tahmazi99 */
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    display: none;
+    visibility: hidden;
+}
+
+.bar {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    /* width: 50px;
+    height: 40px; */
+
+    width: 30px;
+    height: 30px;
+}
+
+.bar span {
+    position: absolute;
+    width: 30px;
+    height: 6px;
+    background: #cfd8fe;
+    border-radius: 100px;
+    display: inline-block;
+    transition: 0.3s ease;
+    left: 0;
+}
+
+.bar span.top {
+    top: 0;
+}
+
+.bar span.middle {
+    top: 13px;
+}
+
+.bar span.bottom {
+    bottom: 0;
+}
+
+input[type]:checked ~ span.top {
+    transform: rotate(45deg);
+    transform-origin: top left;
+    width: 35px;
+    left: 5px;
+}
+
+input[type]:checked ~ span.bottom {
+    transform: rotate(-45deg);
+    transform-origin: top left;
+    width: 35px;
+    bottom: -1px;
+    /* box-shadow: 0 0 10px #495057; */
+}
+
+input[type]:checked ~ span.middle {
+    transform: translateX(-20px);
+    opacity: 0;
+}
+
+/* Texto Logo */
+.sombras {
+    & h1 {
+        color: white;
+        text-shadow: 1px 1px 4px #234cff, 0px 0px 10px #cfd8fe;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        letter-spacing: 10px;
+    }
+}
+
+/* Grilla contactos */
+.Grilla-Contactos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+    justify-content: center;
+    align-items: start;
+    gap: 1rem;
+}
