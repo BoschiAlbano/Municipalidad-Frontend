@@ -34,40 +34,11 @@ function ModalComponent({ modalRoot }: { modalRoot: HTMLElement }) {
 }
 
 function Menu() {
-    const letra = getFirstLetterOfEmail("session");
     const context = useContext(AbmContext);
-    function getFirstLetterOfEmail(name: string): string | null {
-        const value = `${document.cookie}`;
-        const parts = value.split(`${name}=`);
-
-        // Verifica si la cookie existe
-        if (parts.length === 2) {
-            // Decodifica y limpia el valor de la cookie
-            const cookieValorDecodificado = decodeURIComponent(parts[1]);
-            const jsonString = cookieValorDecodificado.replace(/^j:/, "");
-
-            // Intenta parsear el JSON
-            try {
-                const objeto = JSON.parse(jsonString);
-                return objeto.email.charAt(0); // Retorna la primera letra del email
-            } catch (error) {
-                console.error("Error al parsear JSON:", error);
-                return null; // O maneja el error como prefieras
-            }
-        }
-
-        return null; // Si la cookie no existe
-    }
 
     async function salir() {
-        // await fetch(`${import.meta.env.VITE_BACKEND_URL}/logout`, {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     //credentials: "include",
-        // });
         localStorage.removeItem("acceso");
+        window.location.href = "/login";
     }
 
     return (
@@ -78,7 +49,7 @@ function Menu() {
                     className="inline-flex size-16 items-center justify-center group relative"
                 >
                     <span className="grid size-10 place-content-center rounded-lg shadow-lg text-base font-extrabold text-gray-600">
-                        {letra?.toLocaleUpperCase()}
+                        <img src="icon.ico" />
                     </span>
                     <span className="invisible absolute start-full top-1/2 ms-2 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
                         Inicio

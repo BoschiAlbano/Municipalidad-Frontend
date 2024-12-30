@@ -7,11 +7,33 @@ import { useContext, useEffect, useState } from "react";
 import { useAppSelector } from "../../redux/hook/useStore";
 import { useAgendaActions } from "../../redux/hook/agenda/useAgendaActions";
 import { AbmContext } from "../home/ui/abm/context/abm.context";
+import SpinnerComponet from "../spinner/spinner.componet";
+import { debounce } from "ts-debounce";
 
 const ContactosComponent = () => {
     const store = useAppSelector((store) => store.agenda);
     const { agregarTodos } = useAgendaActions();
     const [loading, setLoading] = useState<boolean>(true);
+
+    const [buscar, setBuscar] = useState(store);
+
+    useEffect(() => {
+        setBuscar(store);
+    }, [store]);
+
+    const fitroBuscar = debounce((buscar: string) => {
+        if (buscar !== "") {
+            const result = store.filter(
+                (item) =>
+                    item.Nombre.toLowerCase().includes(buscar.toLowerCase()) ||
+                    item.Apellido.toLowerCase().includes(buscar.toLowerCase())
+            );
+
+            setBuscar(result);
+        } else {
+            setBuscar(store);
+        }
+    }, 800);
 
     useEffect(() => {
         async function GETAll() {
@@ -59,12 +81,29 @@ const ContactosComponent = () => {
                     <h1 className=" lg:text-3xl text-xl">Contactos</h1>
                 </center>
 
+                <section className=" flex flex-row justify-center items-center gap-3">
+                    <input
+                        className=" w-[350px] p-1 text-lg border-[2px] border-purple-300 rounded-xl outline-none"
+                        type="text"
+                        onChange={(e) => fitroBuscar(e.target.value)}
+                    />
+                    <svg
+                        stroke="currentColor"
+                        fill="currentColor"
+                        strokeWidth="0"
+                        viewBox="0 0 512 512"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className=" aspect-square w-[25px] fill-[#d8b4fe]"
+                    >
+                        <path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                    </svg>
+                </section>
                 <section className=" w-full">
                     {loading ? (
-                        <p>Cargando... Api de agenda</p>
+                        <SpinnerComponet />
                     ) : (
                         <section className="Grilla-Contactos w-full">
-                            {store.map((item) => {
+                            {buscar.map((item) => {
                                 return <Tarjetas key={item.id} item={item} />;
                             })}
                         </section>
@@ -80,8 +119,10 @@ export default ContactosComponent;
 function Tarjetas({ item }: { item: contacto }) {
     const context = useContext(AbmContext);
     const { eliminar } = useAgendaActions();
+    const [loading, setLoading] = useState<boolean>(false);
 
     const btnDelete = async ({ id }: { id: number }) => {
+        setLoading(true);
         await fetch(`${import.meta.env.VITE_BACKEND_URL}/agenda/${id}`, {
             method: "DELETE",
             headers: {
@@ -103,6 +144,8 @@ function Tarjetas({ item }: { item: contacto }) {
                 console.log(err);
                 toast.error("Error de conexion");
             });
+
+        setLoading(false);
     };
 
     const btnUpdate = async () => {
@@ -112,8 +155,8 @@ function Tarjetas({ item }: { item: contacto }) {
     };
 
     return (
-        <div className=" flex flex-col justify-center items-center  bg-slate-200 p-4 rounded-[20px] gap-2">
-            <p>{`${item.Nombre} ${item.Apellido}`}</p>
+        <div className=" flex flex-col justify-center items-center border border-purple-300 p-4 rounded-[20px] gap-2">
+            <p className=" text-xl font-semibold">{`${item.Nombre.toUpperCase()} ${item.Apellido.toUpperCase()}`}</p>
             <p>{item.Direccion}</p>
             <p>{item.Email}</p>
             <p>{item.Telefono}</p>
@@ -122,8 +165,9 @@ function Tarjetas({ item }: { item: contacto }) {
                 <li>
                     <button
                         type="button"
-                        className="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                        className="group relative flex justify-center rounded px-2 py-1.5 text-yellow-600 hover:bg-gray-50 hover:text-gray-700"
                         onClick={() => btnUpdate()}
+                        disabled={loading}
                     >
                         <svg
                             stroke="currentColor"
@@ -145,8 +189,9 @@ function Tarjetas({ item }: { item: contacto }) {
                 <li>
                     <button
                         type="button"
-                        className="group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                        className="group relative flex justify-center rounded px-2 py-1.5 text-red-500 hover:bg-gray-50 hover:text-gray-700"
                         onClick={() => btnDelete({ id: item.id })}
+                        disabled={loading}
                     >
                         <svg
                             stroke="currentColor"
@@ -165,6 +210,7 @@ function Tarjetas({ item }: { item: contacto }) {
                     </button>
                 </li>
             </ul>
+            {loading && <SpinnerComponet />}
         </div>
     );
 }

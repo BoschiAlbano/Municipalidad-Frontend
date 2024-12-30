@@ -1,8 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import ReactDOM from "react-dom";
 import { AbmContext } from "./context/abm.context";
 import { toast } from "sonner";
 import { useAgendaActions } from "../../../../redux/hook/agenda/useAgendaActions";
+import SpinnerComponet from "../../../spinner/spinner.componet";
 
 const AbmModalComponent = () => {
     const contexto = useContext(AbmContext);
@@ -55,6 +56,7 @@ function ModalComponent({ modalRoot }: { modalRoot: HTMLElement }) {
 
 function Abm() {
     const { agregar, actualizar } = useAgendaActions();
+    const [loading, setLoading] = useState<boolean>();
 
     const context = useContext(AbmContext);
 
@@ -80,6 +82,7 @@ function Abm() {
     };
 
     async function newContact() {
+        setLoading(true);
         // usar api.
         await fetch(`${import.meta.env.VITE_BACKEND_URL}/agenda`, {
             method: "POST",
@@ -118,9 +121,12 @@ function Abm() {
                 console.log(err);
                 toast.error("Error de conexion");
             });
+        setLoading(false);
     }
 
     async function UpdateContact() {
+        setLoading(true);
+
         // usar api.
         await fetch(`${import.meta.env.VITE_BACKEND_URL}/agenda`, {
             method: "PUT",
@@ -151,10 +157,11 @@ function Abm() {
                 console.log(err);
                 toast.error("Error de conexion");
             });
+        setLoading(false);
     }
 
     return (
-        <div className="flex h-auto w-[300px] p-4 flex-col justify-center border-e bg-gradient-to-b from-blue-200 to-purple-200">
+        <div className="flex h-auto w-[350px] p-4 flex-col justify-center border-e bg-gradient-to-b from-blue-200 to-purple-200">
             <p className=" w-full text-center text-2xl mt-2 mb-6">
                 {context?.operationType === "new"
                     ? "Nuevo Contacto"
@@ -297,14 +304,21 @@ function Abm() {
                     </label>
                 </div>
 
-                <button
-                    className="w-[75%] py-2 px-4 bg-purple-500 hover:bg-purple-700 rounded-md shadow-lg text-white font-semibold transition duration-200"
-                    type="submit"
-                >
-                    {context?.operationType === "new"
-                        ? "Agregar"
-                        : "Actualizar"}
-                </button>
+                {loading ? (
+                    <section className=" w-full flex flex-row  justify-center items-center">
+                        <SpinnerComponet />
+                    </section>
+                ) : (
+                    <button
+                        className="w-[75%] py-2 px-4 bg-purple-500 hover:bg-purple-700 rounded-md shadow-lg text-white font-semibold transition duration-200"
+                        type="submit"
+                        disabled={loading}
+                    >
+                        {context?.operationType === "new"
+                            ? "Agregar"
+                            : "Actualizar"}
+                    </button>
+                )}
             </form>
         </div>
     );
