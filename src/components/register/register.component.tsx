@@ -38,11 +38,11 @@ function Register() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        setloading(true);
-
         if (data.Password !== data.RepetirPassword) {
             return toast.error("Las contraseñas no coinciden");
         }
+
+        setloading(true);
 
         // usar api.
         await fetch(`${import.meta.env.VITE_BACKEND_URL}/register`, {
