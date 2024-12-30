@@ -1,5 +1,3 @@
-import React from "react";
-
 const SpinnerComponet = () => {
     return (
         <div className="loader">
