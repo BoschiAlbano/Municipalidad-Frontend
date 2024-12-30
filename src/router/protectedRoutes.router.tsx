@@ -2,6 +2,7 @@ import { Outlet, Navigate } from "react-router-dom";
 import { AbmContextProvider } from "../components/home/ui/abm/context/abm.context";
 import { Provider } from "react-redux";
 import { store } from "../redux/store/store";
+import AbmModalComponent from "../components/home/ui/abm/abm.component";
 
 const ProtectedRoutes = () => {
     const getTokenFromCookies = () => {
@@ -15,6 +16,7 @@ const ProtectedRoutes = () => {
         <Provider store={store}>
             <AbmContextProvider>
                 <Outlet />
+                <AbmModalComponent />
             </AbmContextProvider>
         </Provider>
     ) : (

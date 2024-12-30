@@ -269,3 +269,7 @@ input[type]:checked ~ span.middle {
         width: 16px;
     }
 }
+
+body.menu-open {
+    overflow: hidden;
+}

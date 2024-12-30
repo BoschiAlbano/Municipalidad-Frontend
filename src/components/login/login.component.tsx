@@ -16,6 +16,8 @@ function Form() {
     const [data, setData] = useState({ Email: "", Password: "" });
     const [passwordShow, setpasswordShow] = useState<boolean>(false);
 
+    const [loading, setloading] = useState<boolean>(false);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setData({
             ...data,
@@ -25,6 +27,7 @@ function Form() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setloading(true);
         // usar api.
         await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
             method: "POST",
@@ -57,12 +60,7 @@ function Form() {
                 console.log(err);
                 toast.error("Error de conexion");
             });
-        // .finally(() => {
-        //     setData({
-        //         Email: "",
-        //         Password: "",
-        //     });
-        // });
+        setloading(false);
     };
 
     return (
@@ -161,8 +159,9 @@ function Form() {
                 <button
                     className="w-[75%] py-2 px-4 bg-purple-500 hover:bg-purple-700 rounded-md shadow-lg text-white font-semibold transition duration-200"
                     type="submit"
+                    disabled={loading}
                 >
-                    Ingresar
+                    {loading ? "Cargando..." : "Ingresar"}
                 </button>
             </form>
             <div className="text-center text-black">

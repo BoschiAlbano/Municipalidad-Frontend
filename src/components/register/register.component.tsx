@@ -22,6 +22,8 @@ function Register() {
         RepetirPassword: "",
     });
 
+    const [loading, setloading] = useState<boolean>(false);
+
     const [passwordShow, setpasswordShow] = useState<boolean>(false);
     const [repetirpasswordShow, setRepetirpasswordShow] =
         useState<boolean>(false);
@@ -35,6 +37,8 @@ function Register() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        setloading(true);
 
         if (data.Password !== data.RepetirPassword) {
             return toast.error("Las contraseñas no coinciden");
@@ -55,7 +59,8 @@ function Register() {
                     // navegar a login.
                     setTimeout(() => {
                         window.location.href = "/login";
-                    }, 3000);
+                    }, 2000);
+                    setloading(false);
                 } else {
                     // si existe detalles mostrar mesanje de error.
                     if (!data?.detalles) {
@@ -64,22 +69,14 @@ function Register() {
                     data?.detalles?.map((error: any) => {
                         toast.error(`${error.campo}: ${error.mensaje}`);
                     });
+                    setloading(false);
                 }
             })
             .catch((err) => {
                 console.log(err);
                 toast.error("Error de conexion");
+                setloading(false);
             });
-        // .finally(() => {
-        //     setData({
-        //         Nombre: "",
-        //         Apellido: "",
-        //         Dni: "",
-        //         Email: "",
-        //         Password: "",
-        //         RepetirPassword: "",
-        //     });
-        // });
     };
 
     return (
@@ -267,8 +264,9 @@ function Register() {
                 <button
                     className="w-[75%] py-2 px-4 bg-purple-500 hover:bg-purple-700 rounded-md shadow-lg text-white font-semibold transition duration-200"
                     type="submit"
+                    disabled={loading}
                 >
-                    Enviar
+                    {loading ? "Cargando..." : "Enviar"}
                 </button>
             </form>
             <div className="text-center text-black">

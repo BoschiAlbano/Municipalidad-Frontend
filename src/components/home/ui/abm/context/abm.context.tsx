@@ -1,5 +1,6 @@
 import React, { useState, createContext } from "react";
 import { contacto } from "../../../../contactos/model/contacto";
+import UseDisableScroll from "../../../../../hook/useDisableScroll";
 
 // Define la interfaz para el contexto
 interface AuthContextType {
@@ -33,7 +34,10 @@ export const AbmContextProvider = ({
         Nota: "",
     });
 
+    const scroll = UseDisableScroll(false);
+
     const handleClose = (isOpenClose: boolean) => {
+        scroll.SetIsShowCarrito(isOpenClose);
         setShow(isOpenClose);
         setTimeout(() => {
             setOpenClose(isOpenClose);

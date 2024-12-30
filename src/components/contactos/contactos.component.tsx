@@ -83,7 +83,7 @@ const ContactosComponent = () => {
 
                 <section className=" flex flex-row justify-center items-center gap-3">
                     <input
-                        className=" w-[350px] p-1 text-lg border-[2px] border-purple-300 rounded-xl outline-none"
+                        className=" lg:w-[350px] w-[250px] p-1 text-lg border-[2px] border-purple-300 rounded-xl outline-none"
                         type="text"
                         onChange={(e) => fitroBuscar(e.target.value)}
                     />
@@ -100,7 +100,9 @@ const ContactosComponent = () => {
                 </section>
                 <section className=" w-full">
                     {loading ? (
-                        <SpinnerComponet />
+                        <section className="w-full flex flex-col justify-center items-center">
+                            <SpinnerComponet />
+                        </section>
                     ) : (
                         <section className="Grilla-Contactos w-full">
                             {buscar.map((item) => {

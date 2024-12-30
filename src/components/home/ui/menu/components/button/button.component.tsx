@@ -13,7 +13,12 @@ export default function ButtonMenu() {
                 }}
             >
                 <label className="bar" htmlFor="check">
-                    <input type="checkbox" defaultChecked={true} id="check" />
+                    <input
+                        type="checkbox"
+                        defaultChecked={false}
+                        checked={context?.OpenClose}
+                        id="check"
+                    />
 
                     <span className="top"></span>
                     <span className="middle"></span>

@@ -2,7 +2,6 @@ import { useContext } from "react";
 import ReactDOM from "react-dom";
 import { MenuContext } from "./context/menu.context";
 import { AbmContext } from "../abm/context/abm.context";
-import AbmModalComponent from "../abm/abm.component";
 import { Link } from "react-router-dom";
 
 const MenuModalComponent = () => {
@@ -23,11 +22,16 @@ function ModalComponent({ modalRoot }: { modalRoot: HTMLElement }) {
 
     return ReactDOM.createPortal(
         <section
-            className={`${
-                contexto?.show ? "showCarrito" : "showNotCarrito"
-            } bg-transparent shadow-2xl rounded-r-[15px] fixed top-0 left-0  sm:m-0  w-[65px] h-full z-[99]`}
+            onClick={() => contexto?.handleClose(false)}
+            className={` fixed inset-0  w-full h-full z-[999] bg-[#0000002d] flex flex-col justify-center items-center`}
         >
-            <Menu />
+            <section
+                className={`${
+                    contexto?.show ? "showCarrito" : "showNotCarrito"
+                } bg-transparent shadow-2xl rounded-r-[15px] fixed top-0 left-0  sm:m-0  w-[65px] h-full z-[99]`}
+            >
+                <Menu />
+            </section>
         </section>,
         modalRoot
     );
@@ -150,7 +154,6 @@ function Menu() {
                     </button>
                 </form>
             </div>
-            <AbmModalComponent />
         </div>
     );
 }

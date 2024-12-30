@@ -16,19 +16,23 @@ const HomeComponent = () => {
                         Agenda de contactos
                     </h1>
                 </center>
-                <p className=" text-2xl mb-4">Descripcion del proyecto.</p>
+                <p className=" text-center text-2xl mb-4">
+                    Descripcion del proyecto.
+                </p>
 
-                <p className=" text-xl">
+                <p className=" text-center text-xl">
                     Proyecto CRUD agenda de contactos con autenticación
                 </p>
 
-                <p className=" text-xl">Front-end React js - Tailwind CSS ✔</p>
-                <p className=" text-xl">
+                <p className=" text-center text-xl">
+                    Front-end React js - Tailwind CSS ✔
+                </p>
+                <p className=" text-center text-xl">
                     Banck-end Node js - Express - Sql Server ✔
                 </p>
-                <p className=" text-xl">Repositorios ✔</p>
+                <p className=" text-center text-xl">Repositorios ✔</p>
                 <a
-                    className=" text-xl text-blue-400"
+                    className=" text-center text-xl text-blue-400"
                     href={
                         "https://github.com/BoschiAlbano/Municipalidad-Backend"
                     }
@@ -36,27 +40,29 @@ const HomeComponent = () => {
                     - Municipaliad Backend -
                 </a>
                 <a
-                    className=" text-xl text-blue-400"
+                    className=" text-center text-xl text-blue-400"
                     href={
                         "https://github.com/BoschiAlbano/Municipalidad-Frontend"
                     }
                 >
                     - Municipaliad Frontend -
                 </a>
-                <p className=" text-xl">Deploy ✔</p>
+                <p className=" text-center text-xl">Deploy ✔</p>
                 <a
-                    className=" text-xl text-blue-400"
+                    className=" text-center text-xl text-blue-400"
                     href={"https://municipalidad-backend.vercel.app"}
                 >
                     - Municipaliad Backend Deploy -
                 </a>
                 <a
-                    className=" text-xl text-blue-400"
+                    className=" text-center text-xl text-blue-400"
                     href={"https://municipalidad-frontend.vercel.app/login"}
                 >
                     - Municipaliad Frontend Deploy -
                 </a>
-                <p className=" text-xl">Autenticacion de usuario JWT ✔</p>
+                <p className=" text-center text-xl">
+                    Autenticacion de usuario JWT ✔
+                </p>
             </div>
         </section>
     );

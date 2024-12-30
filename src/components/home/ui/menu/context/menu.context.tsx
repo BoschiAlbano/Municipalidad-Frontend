@@ -1,4 +1,5 @@
 import React, { useState, createContext } from "react";
+import UseDisableScroll from "../../../../../hook/useDisableScroll";
 
 // Define la interfaz para el contexto
 interface AuthContextType {
@@ -17,11 +18,13 @@ export const MenuContextProvider = ({
 }: {
     children: React.ReactNode;
 }) => {
-    const [OpenClose, setOpenClose] = useState<boolean>(true);
-    const [show, setshow] = useState<boolean>(true);
+    const [OpenClose, setOpenClose] = useState<boolean>(false);
+    const [show, setshow] = useState<boolean>(false);
+    const scroll = UseDisableScroll(false);
 
     const handleClose = (isOpenClose: boolean) => {
         setshow(isOpenClose);
+        scroll.SetIsShowCarrito(isOpenClose);
 
         setTimeout(() => {
             setOpenClose(isOpenClose);
