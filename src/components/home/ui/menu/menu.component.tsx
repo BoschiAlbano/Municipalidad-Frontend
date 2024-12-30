@@ -60,13 +60,14 @@ function Menu() {
     }
 
     async function salir() {
-        await fetch(`/api/logout`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
-        });
+        // await fetch(`${import.meta.env.VITE_BACKEND_URL}/logout`, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     //credentials: "include",
+        // });
+        localStorage.removeItem("acceso");
     }
 
     return (

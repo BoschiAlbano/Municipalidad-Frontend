@@ -32,7 +32,7 @@ function Form() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
-            // credentials: "include",
+            // //credentials: "include",
         })
             .then(async (res) => {
                 const data = await res.json();

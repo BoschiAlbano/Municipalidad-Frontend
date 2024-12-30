@@ -41,7 +41,7 @@ function Register() {
         }
 
         // usar api.
-        await fetch(`/api/register`, {
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

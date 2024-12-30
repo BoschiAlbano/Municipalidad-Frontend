@@ -81,13 +81,14 @@ function Abm() {
 
     async function newContact() {
         // usar api.
-        await fetch(`/api/agenda`, {
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}/agenda`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `bearer ${localStorage.getItem("acceso")}`,
             },
             body: JSON.stringify(context?.currentContact),
-            credentials: "include",
+            //credentials: "include",
         })
             .then(async (res) => {
                 const data = await res.json();
@@ -121,13 +122,14 @@ function Abm() {
 
     async function UpdateContact() {
         // usar api.
-        await fetch(`/api/agenda`, {
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}/agenda`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `bearer ${localStorage.getItem("acceso")}`,
             },
             body: JSON.stringify(context?.currentContact),
-            credentials: "include",
+            //credentials: "include",
         })
             .then(async (res) => {
                 const data = await res.json();

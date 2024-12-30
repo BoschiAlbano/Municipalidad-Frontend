@@ -17,12 +17,15 @@ const ContactosComponent = () => {
         async function GETAll() {
             setLoading(true);
             if (!store.length) {
-                await fetch(`/api/agenda`, {
+                await fetch(`${import.meta.env.VITE_BACKEND_URL}/agenda`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
+                        Authorization: `bearer ${localStorage.getItem(
+                            "acceso"
+                        )}`,
                     },
-                    credentials: "include",
+                    //credentials: "include",
                 })
                     .then(async (res) => {
                         const data = await res.json();
@@ -79,12 +82,13 @@ function Tarjetas({ item }: { item: contacto }) {
     const { eliminar } = useAgendaActions();
 
     const btnDelete = async ({ id }: { id: number }) => {
-        await fetch(`/api/agenda/${id}`, {
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}/agenda/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `bearer ${localStorage.getItem("acceso")}`,
             },
-            credentials: "include",
+            //credentials: "include",
         })
             .then(async (res) => {
                 const data = await res.json();
